@@ -104,7 +104,7 @@ if (piholeStats==null) {
 	return w
 }
 
-w.url = piholeURL
+w.url = piholeURL + "/admin/"
 
 addItem(w, "Total Queries", `${piholeStats.queries.total}` )
 	
