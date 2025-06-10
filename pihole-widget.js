@@ -204,20 +204,30 @@ function addItem(w, strHeadline, strData) {
 }
 
 function setTheme() {
-  if (wTheme == "system") {
-    if (Device.isUsingDarkAppearance()) {
-      wTheme = "dark";
-    } else {
-      wTheme = "light";
-    }
-  }
+  // Define all color values
+  const lightBackground = new Color("#ffffffe6");
+  const darkBackground = new Color("#384d54");
+  const lightText = new Color("#000000");
+  const darkText = new Color("#ffffff");
+
+  // Set gradient stop locations
   wBackground.locations = [0, 1];
-  if (wTheme == "dark") {
-    wBackground.colors = [new Color("#384d54"), new Color("#384d54")];
-    wColor = new Color("#ffffff");
+
+  if (wTheme == "system") {
+    // Use dynamic colors based on system appearance
+    let dynamicBackground = Color.dynamic(lightBackground, darkBackground);
+    let dynamicText = Color.dynamic(lightText, darkText);
+
+    wBackground.colors = [dynamicBackground, dynamicBackground];
+    wColor = dynamicText;
+  } else if (wTheme == "dark") {
+    // Dark theme colors
+    wBackground.colors = [darkBackground, darkBackground];
+    wColor = darkText;
   } else {
-    wBackground.colors = [new Color("#ffffffe6"), new Color("#ffffffe6")];
-    wColor = new Color("#000000");
+    // Light theme colors
+    wBackground.colors = [lightBackground, lightBackground];
+    wColor = lightText;
   }
 }
 
